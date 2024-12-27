@@ -45,12 +45,14 @@ public class Login extends javax.swing.JFrame {
         txt_Contrasena = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         btn_iniciarSesion = new javax.swing.JButton();
+        lbl_logo_login = new javax.swing.JLabel();
         menu_InicioSesion = new javax.swing.JMenuBar();
         menu_abrirCaja = new javax.swing.JMenu();
         menu_gestionUsuarios = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        menu_estadoCaja = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -102,7 +104,7 @@ public class Login extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         btn_iniciarSesion.setText("INICIAR SESIÓN");
@@ -112,6 +114,8 @@ public class Login extends javax.swing.JFrame {
                 btn_iniciarSesionActionPerformed(evt);
             }
         });
+
+        lbl_logo_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/pgy/ui/Logo.png"))); // NOI18N
 
         menu_InicioSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         menu_InicioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -130,6 +134,9 @@ public class Login extends javax.swing.JFrame {
         jMenuItem4.setText("Reportes");
         menu_gestionUsuarios.add(jMenuItem4);
 
+        menu_estadoCaja.setText("Estado de caja");
+        menu_gestionUsuarios.add(menu_estadoCaja);
+
         menu_InicioSesion.add(menu_gestionUsuarios);
 
         setJMenuBar(menu_InicioSesion);
@@ -140,21 +147,29 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 30, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_Login)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txt_Rut, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txt_Contrasena, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btn_iniciarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txt_Rut, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_Contrasena, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btn_iniciarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbl_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(156, 156, 156))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_Login))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_logo_login, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,11 +177,16 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
-                .addComponent(lbl_Login)
-                .addGap(29, 29, 29)
-                .addComponent(lbl_rut)
-                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(lbl_Login)
+                        .addGap(26, 26, 26)
+                        .addComponent(lbl_rut))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lbl_logo_login, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_Rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_contrasena)
@@ -243,9 +263,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel lbl_Login;
     private javax.swing.JLabel lbl_contrasena;
+    private javax.swing.JLabel lbl_logo_login;
     private javax.swing.JLabel lbl_rut;
     private javax.swing.JMenuBar menu_InicioSesion;
     private javax.swing.JMenu menu_abrirCaja;
+    private javax.swing.JMenuItem menu_estadoCaja;
     private javax.swing.JMenu menu_gestionUsuarios;
     private javax.swing.JPasswordField txt_Contrasena;
     private javax.swing.JTextField txt_Rut;
