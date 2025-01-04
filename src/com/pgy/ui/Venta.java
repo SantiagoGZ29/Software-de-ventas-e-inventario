@@ -9,6 +9,13 @@ package com.pgy.ui;
  * @author sgall
  */
 public class Venta extends javax.swing.JFrame {
+    private String rut;
+
+    public Venta(String rut) {
+        this.rut = rut;
+        initComponents();
+    }
+    
 
     /**
      * Creates new form Venta

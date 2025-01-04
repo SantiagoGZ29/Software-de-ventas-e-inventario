@@ -4,11 +4,16 @@
  */
 package com.pgy.ui;
 
+import javax.swing.JOptionPane;
+import com.pgy.business.Usuario;
+import com.pgy.ui.Venta;
+
 /**
  *
  * @author sgall
  */
 public class Login extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form Login
@@ -87,14 +92,17 @@ public class Login extends javax.swing.JFrame {
         lbl_contrasena.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lbl_contrasena.setText("CONTRASEÑA:");
 
-        txt_Rut.setText("Ej: 12345678-9");
         txt_Rut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_RutActionPerformed(evt);
             }
         });
 
-        txt_Contrasena.setText("jPasswordField1");
+        txt_Contrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ContrasenaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,8 +213,30 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_RutActionPerformed
 
     private void btn_iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarSesionActionPerformed
-        // TODO add your handling code here:
+       
+       String rut = txt_Rut.getText();
+       String contrasenna = txt_Contrasena.getText();
+       
+       if (rut.isEmpty() || contrasenna.isEmpty()){
+           JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+       
+       Usuario usuario = new Usuario(rut, contrasenna);
+       
+        if (usuario.autenticar()) {
+            Venta venta = new Venta(rut);              
+            venta.setVisible(true); 
+            this.dispose();
+        } else {
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta. Inténtelo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }        
+       
     }//GEN-LAST:event_btn_iniciarSesionActionPerformed
+
+    private void txt_ContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
