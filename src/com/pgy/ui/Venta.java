@@ -130,6 +130,11 @@ public class Venta extends javax.swing.JFrame {
         btn_cerrarSesion.setBackground(new java.awt.Color(255, 204, 204));
         btn_cerrarSesion.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btn_cerrarSesion.setText("CERRAR SESIÓN");
+        btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarSesionActionPerformed(evt);
+            }
+        });
 
         lbl_titulo.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         lbl_titulo.setText("SISTEMA DE VENTAS ");
@@ -321,6 +326,10 @@ public class Venta extends javax.swing.JFrame {
     private void btn_agregarSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarSkuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_agregarSkuActionPerformed
+
+    private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_cerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments

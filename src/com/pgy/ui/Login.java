@@ -227,7 +227,7 @@ public class Login extends javax.swing.JFrame {
         if (usuario.autenticar()) {
             Venta venta = new Venta(rut);              
             venta.setVisible(true); 
-            this.dispose();
+ 
         } else {
         JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta. Inténtelo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
         }        
