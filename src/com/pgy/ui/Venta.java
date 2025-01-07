@@ -89,35 +89,16 @@ public class Venta extends javax.swing.JFrame {
 
         tb_ventas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Categoría", "Cantidad", "Precio"
+                "Nombre", "Categoría", "Cantidad", "Precio unitario", "Total"
             }
         ));
         jScrollPane2.setViewportView(tb_ventas);
 
         txt_sku.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        txt_sku.setText("2000040098");
 
         btn_imprimirBoleta.setBackground(new java.awt.Color(204, 255, 204));
         btn_imprimirBoleta.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
@@ -267,13 +248,12 @@ public class Venta extends javax.swing.JFrame {
                                 .addComponent(lbl_total_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_totalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(153, 153, 153)
-                            .addComponent(btn_agregarpdcto, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lbl_titulo))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(btn_agregarpdcto, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_titulo)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +417,10 @@ public class Venta extends javax.swing.JFrame {
                 } else {
             // Si no se encuentra el Producto, mostrar un mensaje o dejar los campos vacíos
             JOptionPane.showMessageDialog(null, "Producto no encontrado.");
-        } 
+        }
+        
+        //Formatear el campo de cantidad
+        jSpinner1.setValue(1);
         
     }//GEN-LAST:event_btn_buscarSkuActionPerformed
 
@@ -446,7 +429,47 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cerrarSesionActionPerformed
 
     private void btn_agregarpdctoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarpdctoActionPerformed
-        // TODO add your handling code here:
+
+        // Validar que los campos no estén vacíos
+        if (txt_sku.getText().trim().isEmpty() || txt_nombrePdcto.getText().trim().isEmpty() || txt_categoriaPdcto.getText().trim().isEmpty() || txt_precioPdcto.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun producto, buscar producto primero", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si hay campos vacíos
+        }
+
+        //Obtener los valores de los campos
+        String nombre = txt_nombrePdcto.getText().trim();
+        String categoria = txt_categoriaPdcto.getText().trim();
+        int cantidad = (int) jSpinner1.getValue();
+        double precio = Double.parseDouble(txt_precioPdcto.getText().trim());
+        double total = cantidad * precio;
+
+        //Obtener el modelo de la tabla
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tb_ventas.getModel();
+        //Agregar una fila con los datos
+        
+        // Verificar que la cantidad sea de minimo 1
+        if (cantidad < 1) {
+            JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si la cantidad es menor a 1
+        }
+        else {
+            //Agregar una fila con los dat
+            model.addRow(new Object[]{nombre, categoria, cantidad, precio, total});      
+        }
+
+        // Calcular el total a pagar
+        double totalPagar = 0;
+        for (int i = 0; i < tb_ventas.getRowCount(); i++) {
+            totalPagar += (double) tb_ventas.getValueAt(i, 4);
+        }
+        txt_totalPagar.setText(String.valueOf(totalPagar));
+        
+
+        
+        
+
+
+
     }//GEN-LAST:event_btn_agregarpdctoActionPerformed
 
     /**
