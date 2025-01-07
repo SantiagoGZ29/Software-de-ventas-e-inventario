@@ -260,11 +260,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_Rut">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="100000001"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_RutActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txt_Contrasena">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="contrasena123"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_ContrasenaActionPerformed"/>
       </Events>

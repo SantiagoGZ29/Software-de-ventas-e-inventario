@@ -92,12 +92,14 @@ public class Login extends javax.swing.JFrame {
         lbl_contrasena.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lbl_contrasena.setText("CONTRASEÑA:");
 
+        txt_Rut.setText("100000001");
         txt_Rut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_RutActionPerformed(evt);
             }
         });
 
+        txt_Contrasena.setText("contrasena123");
         txt_Contrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_ContrasenaActionPerformed(evt);
