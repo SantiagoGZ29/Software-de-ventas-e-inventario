@@ -400,27 +400,36 @@ public class Venta extends javax.swing.JFrame {
 
     private void btn_buscarSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarSkuActionPerformed
         
-        // Validar que el campo SKU no esté vacío
-        if (txt_sku.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un SKU", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método si hay campos vacíos
-        }  
-        
-        int sku = Integer.parseInt(txt_sku.getText().trim());
-        Producto producto = new Producto().obtener(sku); 
-        
-        
-        if (producto != null) {
-            txt_nombrePdcto.setText(producto.getNombre());
-            txt_precioPdcto.setText(String.valueOf(producto.getPrecio()));
-            txt_categoriaPdcto.setText(producto.getCategoria());
-                } else {
-            // Si no se encuentra el Producto, mostrar un mensaje o dejar los campos vacíos
-            JOptionPane.showMessageDialog(null, "Producto no encontrado.");
-        }
-        
-        //Formatear el campo de cantidad
-        jSpinner1.setValue(1);
+    // Validar que el campo SKU no esté vacío
+    if (txt_sku.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un SKU", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si el campo está vacío
+    }  
+
+    int sku;
+    try {
+        // Validar que el SKU sea un número entero
+        sku = Integer.parseInt(txt_sku.getText().trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El SKU ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si el SKU no es un número válido
+    }
+
+    // Buscar el producto utilizando el SKU
+    Producto producto = new Producto().obtener(sku); 
+    
+    if (producto != null) {
+        // Mostrar los datos del producto si se encuentra
+        txt_nombrePdcto.setText(producto.getNombre());
+        txt_precioPdcto.setText(String.valueOf(producto.getPrecio()));
+        txt_categoriaPdcto.setText(producto.getCategoria());
+    } else {
+        // Mostrar mensaje si no se encuentra el producto
+        JOptionPane.showMessageDialog(null, "Producto no encontrado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    // Formatear el campo de cantidad
+    jSpinner1.setValue(1);
         
     }//GEN-LAST:event_btn_buscarSkuActionPerformed
 
@@ -445,17 +454,35 @@ public class Venta extends javax.swing.JFrame {
 
         //Obtener el modelo de la tabla
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tb_ventas.getModel();
-        //Agregar una fila con los datos
         
         // Verificar que la cantidad sea de minimo 1
         if (cantidad < 1) {
             JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Salir del método si la cantidad es menor a 1
         }
-        else {
-            //Agregar una fila con los dat
-            model.addRow(new Object[]{nombre, categoria, cantidad, precio, total});      
+        // Bandera para verificar si el producto ya existe en la tabla
+        boolean productoEncontrado = false;
+
+        // Iterar en la tabla buscando si ya existe el producto
+        for (int i = 0; i < tb_ventas.getRowCount(); i++) {
+            if (tb_ventas.getValueAt(i, 0).equals(nombre)) { // Comparar por nombre del producto
+                // Actualizar la cantidad y el total
+                int cantidadActual = (int) tb_ventas.getValueAt(i, 2);
+                double totalActual = (double) tb_ventas.getValueAt(i, 4);
+                tb_ventas.setValueAt(cantidadActual + cantidad, i, 2); // Actualizar cantidad
+                tb_ventas.setValueAt(totalActual + total, i, 4); // Actualizar total
+                productoEncontrado = true;
+                break; // Salir del bucle si se encontró el producto
+            }
         }
+
+        // Si el producto no se encontró, agregarlo a la tabla
+        if (!productoEncontrado) {
+            model.addRow(new Object[]{nombre, categoria, cantidad, precio, total});
+        }
+
+
+
 
         // Calcular el total a pagar
         double totalPagar = 0;
